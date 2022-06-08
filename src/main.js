@@ -6,7 +6,6 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
-
 Vue.config.productionTip = false;
 // Vue.use(vuexfire);
 Vue.directive('mainColor', {
@@ -30,5 +29,5 @@ new Vue({
 	router,
 	store,
 	vuetify,
-	render: h => h(App),
+	render: (h) => h(App),
 }).$mount('#app');

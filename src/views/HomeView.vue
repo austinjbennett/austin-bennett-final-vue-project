@@ -28,7 +28,7 @@
 // import store from '../store';
 
 export default {
-	name: 'home',
+	name: 'homeView',
 	data() {
 		return {
 			red: '#b60000',

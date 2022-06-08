@@ -78,12 +78,15 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
+const auth = firebase.auth();
 
 export default {
 	/* Set a listener to update the state whenever the firebase authState changes */
 	beforeCreate() {
-		firebase.auth().onAuthStateChanged((currentUser) => {
+		auth.onAuthStateChanged((currentUser) => {
 			// console.log('onAuthStateChange Triggered');
 			if (currentUser) {
 				this.$store.dispatch('bindUserRef');

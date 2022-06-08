@@ -7,6 +7,7 @@
 				v-for="(score, index) in scores"
 				:key="index"
 				@click="editScore(index)"
+				@keypress="editScore(index)"
 				v-flash
 			>{{ score }}</li>
 		</ul>
@@ -21,7 +22,7 @@
 			:clearable="true"
 			class="scoreInput"
 		></v-text-field>
-		<v-btn @click="addScore">Add</v-btn>
+		<v-btn @click="addScore" @keypress="addScore">Add</v-btn>
 	</div>
 </template>
 
@@ -37,7 +38,7 @@ export default {
 			name: this.player.name,
 			newScore: null,
 			scoreRules: [
-				value => numRegex.test(value) || 'Only Numbers are Valid',
+				(value) => numRegex.test(value) || 'Only Numbers are Valid',
 			],
 		};
 	},

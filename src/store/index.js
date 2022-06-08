@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { vuexfireMutations, firestoreAction } from 'vuexfire';
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import firestore from '../firebase';
 
 Vue.use(Vuex);
@@ -136,16 +136,16 @@ export default new Vuex.Store({
 		},
 	},
 	getters: {
-		user: state => state.user,
-		uid: state => state.uid,
-		players: state => (state.user ? state.user.players : []),
-		playersLength: state => (state.user ? state.user.players.length : 0),
-		username: state => state.username || '',
-		nextGameId: state => state.nextGameId || 0,
-		games: state => state.games || [],
-		currentGame: state => gameId => state.games.find(o => o.gameId === gameId),
-		error: state => state.error,
-		loginDisabled: state => state.loginDisabled,
-		mainColor: state => state.mainColor,
+		user: (state) => state.user,
+		uid: (state) => state.uid,
+		players: (state) => (state.user ? state.user.players : []),
+		playersLength: (state) => (state.user ? state.user.players.length : 0),
+		username: (state) => state.username || '',
+		nextGameId: (state) => state.nextGameId || 0,
+		games: (state) => state.games || [],
+		currentGame: (state) => (gameId) => state.games.find((o) => o.gameId === gameId),
+		error: (state) => state.error,
+		loginDisabled: (state) => state.loginDisabled,
+		mainColor: (state) => state.mainColor,
 	},
 });

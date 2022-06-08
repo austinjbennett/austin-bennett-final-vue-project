@@ -13,13 +13,13 @@
 
 <script>
 import axios from 'axios';
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import firestore from '../firebase';
 
 export default {
 	data() {
 		return {
-			nameGenUrl: 'https://uinames.com/api/?amount=12',
+			nameGenUrl: 'https://randomuser.me/api/?results=12',
 			names: [],
 		};
 	},
@@ -47,7 +47,8 @@ export default {
 		axios
 			.get(this.nameGenUrl)
 			.then((data) => {
-				const mappedArray = data.data.map(obj => obj.name);
+				console.log(data.data.results);
+				const mappedArray = data.data.results.map((obj) => obj.name.first);
 				this.names = mappedArray;
 			})
 			.catch((error) => {

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Error from '../components/Error.vue';
+import Error from '../components/ErrorComp.vue';
 
 const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -48,10 +48,10 @@ export default {
 			email: '',
 			password: '',
 			emailRules: [
-				value => emailRegex.test(value) || 'Valid email is required',
+				(value) => emailRegex.test(value) || 'Valid email is required',
 			],
 			passwordRules: [
-				value => value.length > 7 || 'Password much be at least 8 characters',
+				(value) => value.length > 7 || 'Password much be at least 8 characters',
 			],
 		};
 	},

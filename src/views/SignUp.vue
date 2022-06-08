@@ -56,14 +56,14 @@ export default {
 			password: '',
 			confirmPassword: '',
 			emailRules: [
-				value => emailRegex.test(value) || 'Valid email is required',
+				(value) => emailRegex.test(value) || 'Valid email is required',
 			],
 			passwordRules: [
-				value => value.length > 5 || 'Password much be at least 6 characters',
+				(value) => value.length > 5 || 'Password much be at least 6 characters',
 			],
 			password2Rules: [
-				value => value.length > 5 || 'Password much be at least 6 characters',
-				value => value === this.password || 'Passwords much match',
+				(value) => value.length > 5 || 'Password much be at least 6 characters',
+				(value) => value === this.password || 'Passwords much match',
 			],
 		};
 	},

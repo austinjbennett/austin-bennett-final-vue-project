@@ -40,8 +40,9 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import Player from '../components/Player.vue';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import Player from '../components/PlayerComp.vue';
 import RandomPlayers from '../components/RandomPlayers.vue';
 import firestore from '../firebase';
 
@@ -87,7 +88,7 @@ export default {
 		},
 		/* Start a new game with the current list of players, this is created directly on the firestore */
 		newGame() {
-			const gamePlayers = this.players.map(obj => ({ ...obj, scores: [] }));
+			const gamePlayers = this.players.map((obj) => ({ ...obj, scores: [] }));
 			this.userDocRef
 				.collection('games')
 				.add({
@@ -102,7 +103,7 @@ export default {
 						.update({ gameId: docRef.id });
 					this.$router.push(`/games/${docRef.id}`);
 				})
-				.catch(error => console.log('error adding new game:', error));
+				.catch((error) => console.log('error adding new game:', error));
 		},
 	},
 	computed: {
