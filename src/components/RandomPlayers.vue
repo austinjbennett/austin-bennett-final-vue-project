@@ -47,7 +47,6 @@ export default {
 		axios
 			.get(this.nameGenUrl)
 			.then((data) => {
-				console.log(data.data.results);
 				const mappedArray = data.data.results.map((obj) => obj.name.first);
 				this.names = mappedArray;
 			})
@@ -67,7 +66,7 @@ export default {
 				})
 				.then()
 				.catch((error) => {
-					console.log('error adding player', error);
+					console.error('error adding player', error);
 				});
 		},
 	},

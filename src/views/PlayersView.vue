@@ -74,7 +74,7 @@ export default {
 						this.playerName = '';
 					})
 					.catch((error) => {
-						console.log('error adding player', error);
+						console.error('error adding player', error);
 					});
 			}
 			return this.error('A name must be at least 2 characters');
@@ -103,7 +103,7 @@ export default {
 						.update({ gameId: docRef.id });
 					this.$router.push(`/games/${docRef.id}`);
 				})
-				.catch((error) => console.log('error adding new game:', error));
+				.catch((error) => console.error('error adding new game:', error));
 		},
 	},
 	computed: {

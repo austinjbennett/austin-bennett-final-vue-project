@@ -89,13 +89,13 @@ export default new Vuex.Store({
 						}).then(() => {
 							context.commit('setUsername', authData.user.displayName);
 						}).catch((error) => {
-							console.log('updateProfile failed: ', error);
+							console.error('updateProfile failed: ', error);
 						});
 					},
 				)
 				.catch(
 					(error) => {
-						console.log(error);
+						console.error(error);
 						context.commit('enableLogin');
 					},
 				);
@@ -105,7 +105,7 @@ export default new Vuex.Store({
 				.then()
 				.catch(
 					(error) => {
-						console.log('signIn() Error Logging In: ', error);
+						console.error('signIn() Error Logging In: ', error);
 						if (error.code === 'auth/wrong-password') {
 							context.commit('error', 'Incorrect password. Please try again.');
 							context.commit('enableLogin');
