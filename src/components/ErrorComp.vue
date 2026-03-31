@@ -1,17 +1,17 @@
 <template>
-	<v-card class="error-card mt-6">
-		<v-card-title class="red white--text">{{ error }}</v-card-title>
-	</v-card>
+  <v-card class="error-card mt-6">
+    <v-card-title class="red white--text">{{ error }}</v-card-title>
+  </v-card>
 </template>
 
 <script>
 export default {
-	props: ['error'],
+  props: ['error'],
 };
 </script>
 
 <style scoped lang=scss>
 .error-card {
-	margin-top: 1rem;
+  margin-top: 1rem;
 }
 </style>

@@ -1,10 +1,12 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import { createVuetify } from 'vuetify';
+import 'vuetify/dist/vuetify.css';
+import * as components from 'vuetify/lib/components';
+import * as directives from 'vuetify/lib/directives';
 
-Vue.use(Vuetify);
-
-export default new Vuetify({
-	icons: {
-		iconfont: 'mdi',
-	},
+export default createVuetify({
+  components,
+  directives,
+  theme: {
+    defaultTheme: 'light',
+  },
 });
