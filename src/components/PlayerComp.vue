@@ -41,18 +41,21 @@ export default {
       this.playerName = '';
     },
     doneEdit(player, index) {
-      this.playerName = '';
+      const trimmedName = player.name.trim();
       this.players[index].editing = false;
       this.$store.dispatch(
         'editPlayer',
         {
-          id: this.playerId,
-          name: this.playerName,
-          editing: false,
+          player: {
+            id: player.id,
+            name: trimmedName,
+            editing: false,
+          },
+          index,
         },
-        index,
       );
-      if (!player.name.trim()) {
+      this.playerName = '';
+      if (!trimmedName) {
         this.removePlayer(index);
       }
     },

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import firebase from 'firebase/compat/app';
 import firestore from '../firebase';
 
@@ -45,10 +44,10 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get(this.nameGenUrl)
+    fetch(this.nameGenUrl)
+      .then((response) => response.json())
       .then((data) => {
-        const mappedArray = data.data.results.map((obj) => obj.name.first);
+        const mappedArray = data.results.map((obj) => obj.name.first);
         this.names = mappedArray;
       })
       .catch((error) => {

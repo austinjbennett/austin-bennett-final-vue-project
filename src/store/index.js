@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import { vuexfireMutations, firestoreAction } from 'vuexfire';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import firestore from '../firebase';
 
 export default createStore({
@@ -18,7 +19,11 @@ export default createStore({
     addPlayer(state, player) {
       state.user.players.push(player);
     },
-    editPlayer(state, player, index) {
+    editPlayer(state, payload) {
+      const { player, index } = payload;
+      if (typeof index !== 'number' || !state.user || !state.user.players[index]) {
+        return;
+      }
       state.user.players[index] = player;
       firestore.collection('users').doc(state.uid).set({
         players: state.user.players,
@@ -73,8 +78,22 @@ export default createStore({
     ...vuexfireMutations,
   },
   actions: {
-    bindUserRef: firestoreAction(({ bindFirestoreRef }) => bindFirestoreRef('user', firestore.collection('users').doc(firebase.auth().currentUser.uid))),
-    bindGamesRef: firestoreAction(({ bindFirestoreRef }) => bindFirestoreRef('games', firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('games').orderBy('created', 'desc'))),
+    bindUserRef: firestoreAction(({ bindFirestoreRef }) => {
+      const { currentUser } = firebase.auth();
+      if (!currentUser) {
+        return Promise.resolve();
+      }
+      const { uid } = currentUser;
+      return bindFirestoreRef('user', firestore.collection('users').doc(uid));
+    }),
+    bindGamesRef: firestoreAction(({ bindFirestoreRef }) => {
+      const { currentUser } = firebase.auth();
+      if (!currentUser) {
+        return Promise.resolve();
+      }
+      const { uid } = currentUser;
+      return bindFirestoreRef('games', firestore.collection('users').doc(uid).collection('games').orderBy('created', 'desc'));
+    }),
 
     createUser(context, payload) {
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
@@ -118,11 +137,11 @@ export default createStore({
     setUsername(context, username) {
       context.commit('setUsername', username);
     },
-    editPlayer(context, player, index) {
-      context.commit('editPlayer', player, index);
+    editPlayer(context, payload) {
+      context.commit('editPlayer', payload);
     },
-    removePlayer(context, player, index) {
-      context.commit('removePlayer', player, index);
+    removePlayer(context, index) {
+      context.commit('removePlayer', index);
     },
     signOut(context) {
       context.commit('signOut');

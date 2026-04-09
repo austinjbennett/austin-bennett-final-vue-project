@@ -3,14 +3,14 @@ import 'firebase/compat/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDjsuX-WdAAqO85E880HoPdJQBZtgeKg6I',
-  authDomain: 'uvu-vue-final.firebaseapp.com',
-  databaseURL: 'https://uvu-vue-final.firebaseio.com',
-  projectId: 'uvu-vue-final',
-  storageBucket: 'uvu-vue-final.appspot.com',
-  messagingSenderId: '1078886765028',
-  appId: '1:1078886765028:web:9c9198181c9259102177f1',
-  measurementId: 'G-86PVC4ZWLK',
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

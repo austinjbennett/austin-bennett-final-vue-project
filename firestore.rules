@@ -1,15 +1,28 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow read/write access to authenticated users only
+    // Users can only access their own documents
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
-      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      
+      // Games subcollection - users can only access their own games
+      match /games/{gameId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+        
+        // Validate game data structure
+        allow create: if request.auth != null 
+          && request.auth.uid == userId
+          && request.resource.data.keys().hasAll(['gameName', 'gamePlayers', 'created'])
+          && request.resource.data.gameName is string
+          && request.resource.data.gameName.size() > 0
+          && request.resource.data.gamePlayers is list
+          && request.resource.data.created is timestamp;
+      }
     }
     
-    // Allow read/write access to games subcollection for authenticated users
-    match /users/{userId}/games/{gameId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    // Rate limiting collection - only functions can write
+    match /rate_limits/{userId}/{operation}/{requestId} {
+      allow read, write: if false; // No direct access
     }
     
     // Deny all other requests
