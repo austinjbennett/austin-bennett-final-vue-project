@@ -11,16 +11,16 @@ const app = createApp(App);
 app.directive('mainColor', {
   mounted(el, binding) {
     if (binding.arg === 'text') {
-			el.style.color = binding.value; // eslint-disable-line
+      el.style.color = binding.value;
     } else {
-			el.style.backgroundColor = binding.value; // eslint-disable-line
+      el.style.backgroundColor = binding.value;
     }
   },
   updated(el, binding) {
     if (binding.arg === 'text') {
-			el.style.color = binding.value; // eslint-disable-line
+      el.style.color = binding.value;
     } else {
-			el.style.backgroundColor = binding.value; // eslint-disable-line
+      el.style.backgroundColor = binding.value;
     }
   },
 });

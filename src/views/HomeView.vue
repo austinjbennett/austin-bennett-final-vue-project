@@ -9,7 +9,7 @@
     >
       Get Started
     </v-btn>
-    <v-card class="mt-9">
+    <v-card class="mt-9 pa-3 w-66 mx-auto">
       <v-card-title>Pick your favorite color:</v-card-title>
       <v-row class="d-flex px-6">
         <v-col cols="12" sm="3">
@@ -72,6 +72,7 @@ export default {
 <style scoped>
 .color-card {
   height: 4rem;
+  padding: .5rem;
 }
 .red {
   background-color: #b60000;
